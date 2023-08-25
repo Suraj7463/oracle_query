@@ -1,0 +1,82 @@
+SQL> select sysdate from dual;
+
+SYSDATE
+---------
+30-JUL-22
+
+SQL> select sysdate "Todays",
+  2  sysdate+1 "Tommarow",
+  3  sysdate-1 "yesterday";
+sysdate-1 "yesterday"
+                    *
+ERROR at line 3:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select sysdate "Todays",
+  2  sysdate+1 "Tommarow",
+  3  sysdate -1 "Yeasterday" from dual;
+
+Todays    Tommarow  Yeasterda
+--------- --------- ---------
+30-JUL-22 31-JUL-22 29-JUL-22
+
+SQL> select current_Date form dual;
+select current_Date form dual
+                         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select current_date from dual;
+
+CURRENT_D
+---------
+30-JUL-22
+
+SQL> select current_date+1 from dual;
+
+CURRENT_D
+---------
+31-JUL-22
+
+SQL> select add_months('30-jul-22',5)from dual;
+
+ADD_MONTH
+---------
+30-DEC-22
+
+SQL> select add_months('30-jul-22',5)from dual;
+
+ADD_MONTH
+---------
+30-DEC-22
+
+SQL> select months_between('01-jan-22','01-jan-21')from dual;
+
+MONTHS_BETWEEN('01-JAN-22','01-JAN-21')
+---------------------------------------
+                                     12
+
+SQL> select months_between('30-jul-22','01-may-2001)/12 from dual;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> select months_between('30-july-22','01-may-2001)/12 from dual;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> select months_between('30-july-22','01-may-01)/12 from dual;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> select months_between('30-july-22','01-may-01')/12 from dual;
+
+MONTHS_BETWEEN('30-JULY-22','01-MAY-01')/12
+-------------------------------------------
+                                 21.2446237
+
+SQL> select months_between('30-july-22','01-may-01')/12 from dual;

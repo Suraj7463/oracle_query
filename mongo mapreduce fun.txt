@@ -1,0 +1,381 @@
+show dbs;
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+mydata  0.000GB
+> use mydata;
+switched to db mydata
+> show tables;
+Div_Total
+highmark
+student
+> db.student.find().pretty();
+{
+        "_id" : ObjectId("61369ca820b511043619b1f6"),
+        "ID" : 1,
+        "name" : "suraj",
+        "phoneno" : 3423424323,
+        "Address" : "pune",
+        "Email" : "surajdudha83@gmail.com",
+        "class" : "TE",
+        "Div" : "A",
+        "mark" : {
+                "DBMS" : 90,
+                "TOC" : 90,
+                "CN" : 85
+        }
+}
+{
+        "_id" : ObjectId("61369f9f20b511043619b1f7"),
+        "ID" : 2,
+        "name" : "ram",
+        "phoneno" : 4938503943,
+        "Address" : "satara",
+        "Email" : "ramchavan34@gmail.com",
+        "class" : "be",
+        "Div" : "A",
+        "mark" : {
+                "dbms" : 70,
+                "toc" : 70,
+                "cn" : 65
+        }
+}
+{
+        "_id" : ObjectId("6136a2a920b511043619b1f8"),
+        "ID" : 3,
+        "name" : "pravin",
+        "phoneno" : 8473920845,
+        "address" : "beed",
+        "Email" : "pravintad8@gmail.com",
+        "class" : "se",
+        "Div" : "b",
+        "mark" : {
+                "dbms" : 40,
+                "toc" : 40,
+                "cn" : 45
+        }
+}
+{
+        "_id" : ObjectId("6136a3ca20b511043619b1f9"),
+        "id" : 4,
+        "name" : "sham",
+        "phoneno" : 4893028454,
+        "address" : "latur",
+        "Email" : "shamtitade43@gmail.com",
+        "class" : "fe",
+        "div" : "A",
+        "mark" : {
+                "dbms" : 50,
+                "toc" : 50,
+                "cn" : 50
+        }
+}
+{
+        "_id" : ObjectId("616c5a6eadb447e829a30d59"),
+        "id" : 5,
+        "name" : "rajesh",
+        "phoneno" : 8500330121,
+        "Address" : "omrga",
+        "class" : "be",
+        "div" : "b",
+        "mark" : {
+                "dbms" : 78,
+                "toc" : 72,
+                "cn" : 65
+        }
+}
+> db.student.mapReduce(function(){
+... emit(this.Div,this.mark.dbms)},
+... function(key,value){
+... return Array.sum(value)},
+... {out:"total_mark"})
+{ "result" : "total_mark", "ok" : 1 }
+> db.total_mark.find();
+{ "_id" : "A", "value" : NaN }
+{ "_id" : "b", "value" : 40 }
+{ "_id" : null, "value" : 128 }
+> db.student.mapReduce(function(){
+... emit(this.Div,this.mark.dbms)},
+... function(key,value){
+...  return Array.sum(value)},
+... {out:"total_mark"})
+{ "result" : "total_mark", "ok" : 1 }
+> db.total_mark.find();
+{ "_id" : "A", "value" : NaN }
+{ "_id" : null, "value" : 128 }
+{ "_id" : "b", "value" : 40 }
+
+> db.student.mapReduce(function(){
+... emit(this.div,this.mark.dbms)},
+... function(key,value){
+... return Array.sum(value)},
+... {out:"total_mark"})
+{ "result" : "total_mark", "ok" : 1 }
+> db.total_mark.find();
+{ "_id" : "b", "value" : 78 }
+{ "_id" : null, "value" : NaN }
+{ db.student.insert({id:4,name:"sham",phoneno:4893028454,address:"latur",Email:"shamtitade43@gmail.com",class:"fe",div:"c",mark:{"dbms":50,toc:50,cn:50}});
+WriteResult({ "nInserted" : 1 })sham",phoneno:4893028454,address:"latur",Email:"shamtitade43@gmail.com",class:"fe",div:"c",mark:{"dbms":50,toc:50,cn:50}});
+> db.student.insert({id:6,name:"sham",phoneno:840938475,address:"latur",Email:"shameowwoiri85@gmail.com",class:"te",div:"A",mark:{"dbms":67,"toc":58,"cn":48}});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({id:7,name:"sham",phoneno:93845869,address:"latur",Email:"dhieoiodpour85@gmail.com",class:"te",div:"A",mark:{"dbms":85,"toc":54,"cn":43}});
+WriteResult({ "nInserted" : 1 })
+> db.student.find();
+{ "_id" : ObjectId("61369ca820b511043619b1f6"), "ID" : 1, "name" : "suraj", "phoneno" : 3423424323, "Address" : "pune", "Email" : "surajdudha83@gmail.com", "class" : "TE", "Div" : "A", "mark" : { "DBMS" : 90, "TOC" : 90, "CN" : 85 } }
+{ "_id" : ObjectId("61369f9f20b511043619b1f7"), "ID" : 2, "name" : "ram", "phoneno" : 4938503943, "Address" : "satara", "Email" : "ramchavan34@gmail.com", "class" : "be", "Div" : "A", "mark" : { "dbms" : 70, "toc" : 70, "cn" : 65 } }
+{ "_id" : ObjectId("6136a2a920b511043619b1f8"), "ID" : 3, "name" : "pravin", "phoneno" : 8473920845, "address" : "beed", "Email" : "pravintad8@gmail.com", "class" : "se", "Div" : "b", "mark" : { "dbms" : 40, "toc" : 40, "cn" : 45 } }
+{ "_id" : ObjectId("6136a3ca20b511043619b1f9"), "id" : 4, "name" : "sham", "phoneno" : 4893028454, "address" : "latur", "Email" : "shamtitade43@gmail.com", "class" : "fe", "div" : "A", "mark" : { "dbms" : 50, "toc" : 50, "cn" : 50 } }
+{ "_id" : ObjectId("616c5a6eadb447e829a30d59"), "id" : 5, "name" : "rajesh", "phoneno" : 8500330121, "Address" : "omrga", "class" : "be", "div" : "b", "mark" : { "dbms" : 78, "toc" : 72, "cn" : 65 } }
+{ "_id" : ObjectId("616e3e4a5f839e71adc41994"), "id" : 4, "name" : "sham", "phoneno" : 4893028454, "address" : "latur", "Email" : "shamtitade43@gmail.com", "class" : "fe", "div" : "c", "mark" : { "dbms" : 50, "toc" : 50, "cn" : 50 } }
+{ "_id" : ObjectId("616e3fb35f839e71adc41995"), "id" : 6, "name" : "sham", "phoneno" : 840938475, "address" : "latur", "Email" : "shameowwoiri85@gmail.com", "class" : "te", "div" : "A", "mark" : { "dbms" : 67, "toc" : 58, "cn" : 48 } }
+{ "_id" : ObjectId("616e40825f839e71adc41996"), "id" : 7, "name" : "sham", "phoneno" : 93845869, "address" : "latur", "Email" : "dhieoiodpour85@gmail.com", "class" : "te", "div" : "A", "mark" : { "dbms" : 85, "toc" : 54, "cn" : 43 } }
+
+> db.student.mapReduce(function(){
+... emit(this.Div,this.mark.dbms)},
+...
+... function(key,value){
+... return Array.sum(value)},
+... {out:"total_mark"})
+{ "result" : "total_mark", "ok" : 1 }
+> db.total_mark.find();
+{ "_id" : "A", "value" : NaN }
+{ "_id" : null, "value" : 330 }
+{ "_id" : "b", "value" : 40 }
+
+> db.student.mapReduce(function(){
+... emit(this.name,this.mark.dbms)},
+... function(key,value){
+... return Array.sum(value)},
+... {out:"total_mark"})
+{ "result" : "total_mark", "ok" : 1 }
+> db.total_mark.find();
+{ "_id" : "pravin", "value" : 40 }
+{ "_id" : "sham", "value" : 252 }
+{ "_id" : "suraj", "value" : null }
+{ "_id" : "rajesh", "value" : 78 }
+{ "_id" : "ram", "value" : 70 }
+> db.student.mapReduce(function(){
+... emit(this.name,this.mark.dbms)},
+... function(key,value){
+... return Array.avg(value)},
+... {out:"total_mark"})
+{ "result" : "total_mark", "ok" : 1 }
+> db.total.mark.find();
+> db.total_mark.find();
+{ "_id" : "ram", "value" : 70 }
+{ "_id" : "rajesh", "value" : 78 }
+{ "_id" : "sham", "value" : 63 }
+{ "_id" : "suraj", "value" : NaN }
+{ "_id" : "pravin", "value" : 40 }
+> db.student.mapReduce(function(){emit(this.name,this.mark.dbms)},function(key,value){return Array.avg(value)},{out:"total_mark"}).sort({value:1})
+uncaught exception: TypeError: db.student.mapReduce(...).sort is not a function :
+@(shell):1:1
+
+> db.total_mark.find().sort({value:1});
+{ "_id" : "suraj", "value" : NaN }
+{ "_id" : "pravin", "value" : 40 }
+{ "_id" : "sham", "value" : 63 }
+{ "_id" : "ram", "value" : 70 }
+{ "_id" : "rajesh", "value" : 78 }
+> db.total_mark.find().sort({value:-1});
+{ "_id" : "rajesh", "value" : 78 }
+{ "_id" : "ram", "value" : 70 }
+{ "_id" : "sham", "value" : 63 }
+{ "_id" : "pravin", "value" : 40 }
+{ "_id" : "suraj", "value" : NaN }
+> db.student.mapReduce(function(){emit(this.name,this.mark.dbms)},function(key,value){return Array.avg(value)},{out:"total_mark"}).find().sort({value:1});
+uncaught exception: TypeError: db.student.mapReduce(...).find is not a function :
+@(shell):1:1
+
+> show tables;
+Div_Total
+highmark
+student
+total_mark
+> db.student.find().pretty();
+{
+        "_id" : ObjectId("61369ca820b511043619b1f6"),
+        "ID" : 1,
+        "name" : "suraj",
+        "phoneno" : 3423424323,
+        "Address" : "pune",
+        "Email" : "surajdudha83@gmail.com",
+        "class" : "TE",
+        "Div" : "A",
+        "mark" : {
+                "DBMS" : 90,
+                "TOC" : 90,
+                "CN" : 85
+        }
+}
+{
+        "_id" : ObjectId("61369f9f20b511043619b1f7"),
+        "ID" : 2,
+        "name" : "ram",
+        "phoneno" : 4938503943,
+        "Address" : "satara",
+        "Email" : "ramchavan34@gmail.com",
+        "class" : "be",
+        "Div" : "A",
+        "mark" : {
+                "dbms" : 70,
+                "toc" : 70,
+                "cn" : 65
+        }
+}
+{
+        "_id" : ObjectId("6136a2a920b511043619b1f8"),
+        "ID" : 3,
+        "name" : "pravin",
+        "phoneno" : 8473920845,
+        "address" : "beed",
+        "Email" : "pravintad8@gmail.com",
+        "class" : "se",
+        "Div" : "b",
+        "mark" : {
+                "dbms" : 40,
+                "toc" : 40,
+                "cn" : 45
+        }
+}
+{
+        "_id" : ObjectId("6136a3ca20b511043619b1f9"),
+        "id" : 4,
+        "name" : "sham",
+        "phoneno" : 4893028454,
+        "address" : "latur",
+        "Email" : "shamtitade43@gmail.com",
+        "class" : "fe",
+        "div" : "A",
+        "mark" : {
+                "dbms" : 50,
+                "toc" : 50,
+                "cn" : 50
+        }
+}
+{
+        "_id" : ObjectId("616c5a6eadb447e829a30d59"),
+        "id" : 5,
+        "name" : "rajesh",
+        "phoneno" : 8500330121,
+        "Address" : "omrga",
+        "class" : "be",
+        "div" : "b",
+        "mark" : {
+                "dbms" : 78,
+                "toc" : 72,
+                "cn" : 65
+        }
+}
+{
+        "_id" : ObjectId("616e3e4a5f839e71adc41994"),
+        "id" : 4,
+        "name" : "sham",
+        "phoneno" : 4893028454,
+        "address" : "latur",
+        "Email" : "shamtitade43@gmail.com",
+        "class" : "fe",
+        "div" : "c",
+        "mark" : {
+                "dbms" : 50,
+                "toc" : 50,
+                "cn" : 50
+        }
+}
+{
+        "_id" : ObjectId("616e3fb35f839e71adc41995"),
+        "id" : 6,
+        "name" : "sham",
+        "phoneno" : 840938475,
+        "address" : "latur",
+        "Email" : "shameowwoiri85@gmail.com",
+        "class" : "te",
+        "div" : "A",
+        "mark" : {
+                "dbms" : 67,
+                "toc" : 58,
+                "cn" : 48
+        }
+}
+{
+        "_id" : ObjectId("616e40825f839e71adc41996"),
+        "id" : 7,
+        "name" : "sham",
+        "phoneno" : 93845869,
+        "address" : "latur",
+        "Email" : "dhieoiodpour85@gmail.com",
+        "class" : "te",
+        "div" : "A",
+        "mark" : {
+                "dbms" : 85,
+                "toc" : 54,
+                "cn" : 43
+        }
+}
+> db.total_mark.find().limit(1);
+{ "_id" : "ram", "value" : 70 }
+> db.total_mark.find();
+{ "_id" : "ram", "value" : 70 }
+{ "_id" : "rajesh", "value" : 78 }
+{ "_id" : "suraj", "value" : NaN }
+{ "_id" : "sham", "value" : 63 }
+{ "_id" : "pravin", "value" : 40 }
+> db.total_mark.find().limit(3);
+{ "_id" : "ram", "value" : 70 }
+{ "_id" : "rajesh", "value" : 78 }
+{ "_id" : "suraj", "value" : NaN }
+> db.student.find([name:"ram"]);
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:21
+> db.student.find({name:"ram"});
+{ "_id" : ObjectId("61369f9f20b511043619b1f7"), "ID" : 2, "name" : "ram", "phoneno" : 4938503943, "Address" : "satara", "Email" : "ramchavan34@gmail.com", "class" : "be", "Div" : "A", "mark" : { "dbms" : 70, "toc" : 70, "cn" : 65 } }
+> db.student.remove({name:"ram"});
+WriteResult({ "nRemoved" : 1 })
+> db.student.find();
+{ "_id" : ObjectId("61369ca820b511043619b1f6"), "ID" : 1, "name" : "suraj", "phoneno" : 3423424323, "Address" : "pune", "Email" : "surajdudha83@gmail.com", "class" : "TE", "Div" : "A", "mark" : { "DBMS" : 90, "TOC" : 90, "CN" : 85 } }
+{ "_id" : ObjectId("6136a2a920b511043619b1f8"), "ID" : 3, "name" : "pravin", "phoneno" : 8473920845, "address" : "beed", "Email" : "pravintad8@gmail.com", "class" : "se", "Div" : "b", "mark" : { "dbms" : 40, "toc" : 40, "cn" : 45 } }
+{ "_id" : ObjectId("6136a3ca20b511043619b1f9"), "id" : 4, "name" : "sham", "phoneno" : 4893028454, "address" : "latur", "Email" : "shamtitade43@gmail.com", "class" : "fe", "div" : "A", "mark" : { "dbms" : 50, "toc" : 50, "cn" : 50 } }
+{ "_id" : ObjectId("616c5a6eadb447e829a30d59"), "id" : 5, "name" : "rajesh", "phoneno" : 8500330121, "Address" : "omrga", "class" : "be", "div" : "b", "mark" : { "dbms" : 78, "toc" : 72, "cn" : 65 } }
+{ "_id" : ObjectId("616e3e4a5f839e71adc41994"), "id" : 4, "name" : "sham", "phoneno" : 4893028454, "address" : "latur", "Email" : "shamtitade43@gmail.com", "class" : "fe", "div" : "c", "mark" : { "dbms" : 50, "toc" : 50, "cn" : 50 } }
+{ "_id" : ObjectId("616e3fb35f839e71adc41995"), "id" : 6, "name" : "sham", "phoneno" : 840938475, "address" : "latur", "Email" : "shameowwoiri85@gmail.com", "class" : "te", "div" : "A", "mark" : { "dbms" : 67, "toc" : 58, "cn" : 48 } }
+{ "_id" : ObjectId("616e40825f839e71adc41996"), "id" : 7, "name" : "sham", "phoneno" : 93845869, "address" : "latur", "Email" : "dhieoiodpour85@gmail.com", "class" : "te", "div" : "A", "mark" : { "dbms" : 85, "toc" : 54, "cn" : 43 } }
+>
+
+> db.student.insert({"id":8,"name":"suraj","phoneno":84039249,"Address":"latur","Email":"uweiodkoeo@gmail.com","class":"se","div":"b","mark":["dbms","toc","cn"]});
+WriteResult({ "nInserted" : 1 })
+> db.student.update({id:8},{$pop:{mark:1}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.student.find();
+{ "_id" : ObjectId("61369ca820b511043619b1f6"), "ID" : 1, "name" : "suraj", "phoneno" : 3423424323, "Address" : "pune", "Email" : "surajdudha83@gmail.com", "class" : "TE", "Div" : "A", "mark" : { "DBMS" : 90, "TOC" : 90, "CN" : 85 } }
+{ "_id" : ObjectId("6136a2a920b511043619b1f8"), "ID" : 3, "name" : "pravin", "phoneno" : 8473920845, "address" : "beed", "Email" : "pravintad8@gmail.com", "class" : "se", "Div" : "b", "mark" : { "dbms" : 40, "toc" : 40, "cn" : 45 } }
+{ "_id" : ObjectId("6136a3ca20b511043619b1f9"), "id" : 4, "name" : "sham", "phoneno" : 4893028454, "address" : "latur", "Email" : "shamtitade43@gmail.com", "class" : "fe", "div" : "A", "mark" : { "dbms" : 50, "toc" : 50, "cn" : 50 } }
+{ "_id" : ObjectId("616c5a6eadb447e829a30d59"), "id" : 5, "name" : "rajesh", "phoneno" : 8500330121, "Address" : "omrga", "class" : "be", "div" : "b", "mark" : { "dbms" : 78, "toc" : 72, "cn" : 65 } }
+{ "_id" : ObjectId("616e3e4a5f839e71adc41994"), "id" : 4, "name" : "sham", "phoneno" : 4893028454, "address" : "latur", "Email" : "shamtitade43@gmail.com", "class" : "fe", "div" : "c", "mark" : { "dbms" : 50, "toc" : 50, "cn" : 50 } }
+{ "_id" : ObjectId("616e3fb35f839e71adc41995"), "id" : 6, "name" : "sham", "phoneno" : 840938475, "address" : "latur", "Email" : "shameowwoiri85@gmail.com", "class" : "te", "div" : "A", "mark" : { "dbms" : 67, "toc" : 58, "cn" : 48 } }
+{ "_id" : ObjectId("616e40825f839e71adc41996"), "id" : 7, "name" : "sham", "phoneno" : 93845869, "address" : "latur", "Email" : "dhieoiodpour85@gmail.com", "class" : "te", "div" : "A", "mark" : { "dbms" : 85, "toc" : 54, "cn" : 43 } }
+{ "_id" : ObjectId("617199eddc1f048af9fe6512"), "id" : 8, "name" : "suraj", "phoneno" : 84039249, "Address" : "latur", "Email" : "uweiodkoeo@gmail.com", "class" : "se", "div" : "b", "mark" : [ "dbms", "toc" ] }
+
+> db.student.update({id:8},{$pop:{mark:-1}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.student.find();
+{ "_id" : ObjectId("61369ca820b511043619b1f6"), "ID" : 1, "name" : "suraj", "phoneno" : 3423424323, "Address" : "pune", "Email" : "surajdudha83@gmail.com", "class" : "TE", "Div" : "A", "mark" : { "DBMS" : 90, "TOC" : 90, "CN" : 85 } }
+{ "_id" : ObjectId("6136a2a920b511043619b1f8"), "ID" : 3, "name" : "pravin", "phoneno" : 8473920845, "address" : "beed", "Email" : "pravintad8@gmail.com", "class" : "se", "Div" : "b", "mark" : { "dbms" : 40, "toc" : 40, "cn" : 45 } }
+{ "_id" : ObjectId("6136a3ca20b511043619b1f9"), "id" : 4, "name" : "sham", "phoneno" : 4893028454, "address" : "latur", "Email" : "shamtitade43@gmail.com", "class" : "fe", "div" : "A", "mark" : { "dbms" : 50, "toc" : 50, "cn" : 50 } }
+{ "_id" : ObjectId("616c5a6eadb447e829a30d59"), "id" : 5, "name" : "rajesh", "phoneno" : 8500330121, "Address" : "omrga", "class" : "be", "div" : "b", "mark" : { "dbms" : 78, "toc" : 72, "cn" : 65 } }
+{ "_id" : ObjectId("616e3e4a5f839e71adc41994"), "id" : 4, "name" : "sham", "phoneno" : 4893028454, "address" : "latur", "Email" : "shamtitade43@gmail.com", "class" : "fe", "div" : "c", "mark" : { "dbms" : 50, "toc" : 50, "cn" : 50 } }
+{ "_id" : ObjectId("616e3fb35f839e71adc41995"), "id" : 6, "name" : "sham", "phoneno" : 840938475, "address" : "latur", "Email" : "shameowwoiri85@gmail.com", "class" : "te", "div" : "A", "mark" : { "dbms" : 67, "toc" : 58, "cn" : 48 } }
+{ "_id" : ObjectId("616e40825f839e71adc41996"), "id" : 7, "name" : "sham", "phoneno" : 93845869, "address" : "latur", "Email" : "dhieoiodpour85@gmail.com", "class" : "te", "div" : "A", "mark" : { "dbms" : 85, "toc" : 54, "cn" : 43 } }
+{ "_id" : ObjectId("617199eddc1f048af9fe6512"), "id" : 8, "name" : "suraj", "phoneno" : 84039249, "Address" : "latur", "Email" : "uweiodkoeo@gmail.com", "class" : "se", "div" : "b", "mark" : [ "toc" ] }
+
+> db.student.update({id:8},{$push:{mark:"dbms"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+> db.student.find().limit(8);
+{ "_id" : ObjectId("61369ca820b511043619b1f6"), "ID" : 1, "name" : "suraj", "phoneno" : 3423424323, "Address" : "pune", "Email" : "surajdudha83@gmail.com", "class" : "TE", "Div" : "A", "mark" : { "DBMS" : 90, "TOC" : 90, "CN" : 85 } }
+{ "_id" : ObjectId("6136a2a920b511043619b1f8"), "ID" : 3, "name" : "pravin", "phoneno" : 8473920845, "address" : "beed", "Email" : "pravintad8@gmail.com", "class" : "se", "Div" : "b", "mark" : { "dbms" : 40, "toc" : 40, "cn" : 45 } }
+{ "_id" : ObjectId("6136a3ca20b511043619b1f9"), "id" : 4, "name" : "sham", "phoneno" : 4893028454, "address" : "latur", "Email" : "shamtitade43@gmail.com", "class" : "fe", "div" : "A", "mark" : { "dbms" : 50, "toc" : 50, "cn" : 50 } }
+{ "_id" : ObjectId("616c5a6eadb447e829a30d59"), "id" : 5, "name" : "rajesh", "phoneno" : 8500330121, "Address" : "omrga", "class" : "be", "div" : "b", "mark" : { "dbms" : 78, "toc" : 72, "cn" : 65 } }
+{ "_id" : ObjectId("616e3e4a5f839e71adc41994"), "id" : 4, "name" : "sham", "phoneno" : 4893028454, "address" : "latur", "Email" : "shamtitade43@gmail.com", "class" : "fe", "div" : "c", "mark" : { "dbms" : 50, "toc" : 50, "cn" : 50 } }
+{ "_id" : ObjectId("616e3fb35f839e71adc41995"), "id" : 6, "name" : "sham", "phoneno" : 840938475, "address" : "latur", "Email" : "shameowwoiri85@gmail.com", "class" : "te", "div" : "A", "mark" : { "dbms" : 67, "toc" : 58, "cn" : 48 } }
+{ "_id" : ObjectId("616e40825f839e71adc41996"), "id" : 7, "name" : "sham", "phoneno" : 93845869, "address" : "latur", "Email" : "dhieoiodpour85@gmail.com", "class" : "te", "div" : "A", "mark" : { "dbms" : 85, "toc" : 54, "cn" : 43 } }
+{ "_id" : ObjectId("617199eddc1f048af9fe6512"), "id" : 8, "name" : "suraj", "phoneno" : 84039249, "Address" : "latur", "Email" : "uweiodkoeo@gmail.com", "class" : "se", "div" : "b", "mark" : [ "toc", "dbms" ] }

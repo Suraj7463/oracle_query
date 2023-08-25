@@ -1,0 +1,118 @@
+mysql> create database emp;
+Query OK, 1 row affected (0.08 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| detail             |
+| emp                |
+| employ             |
+| employ_1           |
+| freands            |
+| information_schema |
+| my_data            |
+| my_data1           |
+| my_db              |
+| mydata             |
+| mysql              |
+| performance_schema |
+| seles              |
+| stud_info          |
+| student            |
+| student1           |
+| student2           |
+| suraj              |
+| sys                |
++--------------------+
+19 rows in set (0.06 sec)
+
+mysql> use emp;
+Database changed
+mysql> create table emp_rec(empno int(5) primary key,ename varchar(20),salary float(10,2));
+Query OK, 0 rows affected, 2 warnings (0.07 sec)
+
+mysql> desc emp_rec;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| empno  | int         | NO   | PRI | NULL    |       |
+| ename  | varchar(20) | YES  |     | NULL    |       |
+| salary | float(10,2) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into emp_rec values(1,'suraj',60000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into emp_rec values(2,'ram',50000),(3,'mahesh',40000);
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from emp_rec;
++-------+--------+----------+
+| empno | ename  | salary   |
++-------+--------+----------+
+|     1 | suraj  | 60000.00 |
+|     2 | ram    | 50000.00 |
+|     3 | mahesh | 40000.00 |
++-------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from emp_rec where empno=1;
++-------+-------+----------+
+| empno | ename | salary   |
++-------+-------+----------+
+|     1 | suraj | 60000.00 |
++-------+-------+----------+
+1 row in set (0.01 sec)
+
+mysql> select empno,ename form emp_rec;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'emp_rec' at line 1
+mysql> select empno,ename from emp_rec;
++-------+--------+
+| empno | ename  |
++-------+--------+
+|     1 | suraj  |
+|     2 | ram    |
+|     3 | mahesh |
++-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> selsect * from emp_rec where empname='suraj';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selsect * from emp_rec where empname='suraj'' at line 1
+mysql> select * from emp_rec where ename="suraj";
++-------+-------+----------+
+| empno | ename | salary   |
++-------+-------+----------+
+|     1 | suraj | 60000.00 |
++-------+-------+----------+
+1 row in set (0.01 sec)
+
+mysql> update emp_rec set salary=95000 where ename='suraj';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from emp_rec;
++-------+--------+----------+
+| empno | ename  | salary   |
++-------+--------+----------+
+|     1 | suraj  | 95000.00 |
+|     2 | ram    | 50000.00 |
+|     3 | mahesh | 40000.00 |
++-------+--------+----------+
+3 rows in set (0.01 sec)
+
+mysql> delete from emp_rec where empno=2;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from emp_rec;
++-------+--------+----------+
+| empno | ename  | salary   |
++-------+--------+----------+
+|     1 | suraj  | 95000.00 |
+|     3 | mahesh | 40000.00 |
++-------+--------+----------+
+2 rows in set (0.00 sec)
+
+mysql>

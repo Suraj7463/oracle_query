@@ -1,0 +1,327 @@
+Q1) what is oop and explain in details method overloading with example?
+
+ans-java is pure object orianted programming language becuse of whole code write in class thats resons java is object orianted  programming language
+   
+   -methoe overloading in java when a class have multiple methods by same name but diffrent parameters i.e know as method overloading.
+                
+
+Q2)----?
+--->import java.util.Scanner;
+
+class TestSquareCube {
+    static int n;
+    private int s;
+    private int c;
+
+    public void squre() {
+        s = n * n;
+        System.out.println("squre of no is :" + s);
+
+    }
+
+    public void cube() {
+        int c = 0;
+        c = n * n * n;
+        System.out.println("cube of no is :" + c);
+
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter no:");
+        n = sc.nextInt();
+        TestSquareCube obj = new TestSquareCube();
+        obj.squre();
+        obj.cube();
+
+    }
+}
+
+Q3)---------?
+----> import java.util.Scanner;
+
+public class person {
+    private String fname;
+    private String lname;
+
+    public void setData() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter first name :");
+        fname = sc.nextLine();
+
+        System.out.println("enter last name:");
+        lname = sc.nextLine();
+
+    }
+
+    public void fullname() {
+        System.out.println(fname + " " + lname);
+
+    }
+
+    public static void main(String[] args) {
+        person obj = new person();
+
+        obj.setData();
+        obj.fullname();
+    }
+
+}
+
+Q4)-----?
+---->  import java.util.Scanner;
+
+public class Box {
+
+    private int l;
+    private int b;
+    private int h;
+    private int v;
+
+    public void setData() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter length:");
+        l = sc.nextInt();
+
+        System.out.println("enter bredth:");
+        b = sc.nextInt();
+
+        System.out.println("enter height:");
+        h = sc.nextInt();
+
+    }
+
+    public void volume() {
+        v = l * b * h;
+        System.out.println("volume of box is :" + v);
+    }
+
+    public static void main(String[] args) {
+
+        Box obj = new Box();
+        obj.setData();
+        obj.volume();
+
+    }
+
+}
+
+Q5)----------?
+-------->  public class pattern1 {
+
+    public static void main(String[] args) {
+        int i, j;
+
+        for (i = 1; i <= 5; i++) {
+            for (j = i; j <= 5; j++) {
+                System.out.print(j);
+            }
+            System.out.println();
+        }
+
+    }
+
+}
+
+Q6)------?
+---------> public class pattern2 {
+
+    public static void main(String[] args) {
+        int i, j, n = 9;
+
+        for (i = 6; i <= n; i++) {
+            for (j = n; j >= i; j--) {
+                System.out.print(j);
+            }
+            System.out.println();
+        }
+
+    }
+
+}
+
+Q7)-------?
+----->  public class pattern3 {
+    public static void main(String[] args) {
+        int i, j, n = 5;
+
+        for (i = 1; i <= n; i++) {
+            for (j = 5; j >= i; j--) {
+                System.out.print(j);
+            }
+            System.out.println();
+        }
+
+    }
+
+}
+
+
+Q8)--------?
+----->import java.util.Scanner;
+
+public class eligiblity {
+    private String cast;
+    private int age;
+
+    public static void main(String[] args) {
+        eligiblity obj = new eligiblity();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter cast and age :");
+
+        obj.cast = sc.nextLine();
+        obj.age = sc.nextInt();
+
+        if (obj.age >= 22 && obj.age <= 33 && obj.cast.equals("NT")) {
+            System.out.println("eligible for Exam");
+        } else if (obj.age >= 25 && obj.age <= 30 && obj.cast.equals("OBC")) {
+            System.out.println("eligible for Exam");
+        } else if (obj.age >= 27 && obj.age <= 30 && obj.cast.equals("Open")) {
+            System.out.println("eligible for Exam");
+
+        } else {
+            System.out.println("Not eligible for Exam");
+
+        }
+
+    }
+
+}
+
+
+Q9)-------?
+----->import java.util.Scanner;
+
+public class ElecricityUser {
+    private String customername;
+    private String typeofarea;
+    private int no_units;
+    private int bill_amt;
+
+    public void acceptData() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter customer name:");
+        customername = sc.nextLine();
+
+        System.out.println("enter customer typeofarea:");
+        typeofarea = sc.nextLine();
+
+        System.out.println("enter no_units:");
+        no_units = sc.nextInt();
+
+    }
+
+    public void showData() {
+        System.out.println("customer name is:" + customername);
+        System.out.println("customer typeofarea is :" + typeofarea);
+        System.out.println("customer no_units is:" + no_units);
+
+    }
+
+    public void billamount() {
+        if (typeofarea.equals("rural")) {
+            bill_amt = no_units * 5;
+
+            System.out.println("customer bill_amt is :" + bill_amt);
+        } else if (typeofarea.equals("urban")) {
+            bill_amt = no_units * 10;
+
+            System.out.println("customer bill_amt is :" + bill_amt);
+        } else if (typeofarea.equals("metro")) {
+            bill_amt = no_units * 20;
+
+            System.out.println("customer bill_amt is :" + bill_amt);
+        } else {
+            System.out.println("invalid input");
+        }
+
+    }
+
+}
+
+class TestElicricity {
+    public static void main(String[] args) {
+        ElecricityUser obj = new ElecricityUser();
+
+        obj.acceptData();
+        obj.showData();
+        obj.billamount();
+    }
+}
+
+
+Q10)---------?
+------>import java.util.Scanner;
+
+public class BankOfAmerica {
+    private String cust_name;
+    private int noy;
+    private int amount;
+    private String service;
+    private float fd_roi;
+    private float cl_roi;
+    private float hl_roi;
+    private float tot_intr;
+    private float mat_amt;
+    private float emi_amt;
+    private float tot_amt;
+
+    public BankOfAmerica() {
+        fd_roi = 0.10f;
+        cl_roi = 0.20f;
+        hl_roi = 0.7f;
+    }
+
+    public void acceptData() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("enter service name is:");
+        service = sc.nextLine();
+
+        System.out.println("enter customer name is:");
+        cust_name = sc.nextLine();
+
+        System.out.println("enter number of year is:");
+        noy = sc.nextInt();
+
+        System.out.println("enter amount:");
+        amount = sc.nextInt();
+
+    }
+
+    public void showData() {
+        System.out.println("customer name is :" + cust_name);
+        System.out.println("number of year is :" + noy);
+        System.out.println("customer amount is :" + amount);
+        System.out.println("customer service name is :" + service);
+
+    }
+
+    public void calculate() {
+        if (service.equals("FixedDeposit")) {
+            tot_intr = amount * fd_roi;
+            mat_amt = tot_intr * noy;
+            System.out.println("total intreast is :" + tot_intr);
+            System.out.println("total amount is :" + mat_amt);
+
+        } else if (service.equals("Car Loan") || (service.equals("Home Loan"))) {
+
+            tot_amt = noy * cl_roi * amount * hl_roi;
+            System.out.println(tot_amt);
+
+        } else {
+            System.out.println("invalid sevice name");
+
+        }
+    }
+
+}
+
+class Testbank {
+    public static void main(String[] args) {
+        BankOfAmerica obj = new BankOfAmerica();
+        obj.acceptData();
+        obj.showData();
+        obj.calculate();
+    }
+}

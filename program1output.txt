@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>www.amazon,com</title>
+</head>
+<body bgcolor="creamson">
+	<center>
+		<h1>Amazon</h1>
+		<h1>Amazon</h1>
+		<h1>Amazon</h1>
+		<h1>Amazon</h1>
+		<h1>Amazon</h1>
+		<h1>Amazon</h1>
+		<h1>Amazon</h1>
+	</center>
+	<hr color="green" size="7">
+	<br>
+		<h3>INDIA</h3>
+		<h4>INDIA</h4>
+		<h5>INDIA</h5>
+		<h6>INDIA</h6>
+		<br>
+		<h4>this is my 1<sup>st</sup> web page<h4>
+		<h4>this is my first web page<h4>
+		<h4>this is my first web page<h4>
+
+	    <h3>molecular formula of water is H<sub>2</sub>O
+	    	<br>
+	    	<pre>
+	    		java
+	    		    php
+	    		       python
+	    	</pre>
+</body>
+</html>

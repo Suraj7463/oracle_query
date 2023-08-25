@@ -1,0 +1,149 @@
+package mysql1;
+import java.util.*;
+import java.sql.*;
+
+public class surajcon {
+
+	public static void main(String[] args) {
+	
+			try {
+				Scanner sc= new Scanner(System.in);
+				System.out.print("enter s_result roll_no");
+				int roll_no=sc.nextInt();
+				System.out.print("enter s_result mark");
+				int mk=sc.nextInt();
+				System.out.print("enter s_result class");
+				String cl=sc.next();
+					
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/student","root","Suraj@12345");
+				Statement stmt=con.createStatement();
+				String query = "INSERT INTO s_result VALUES("+roll_no+","+mk+",'"+cl+"');";
+				stmt.execute(query);
+				con.close();
+				sc.close();
+			}catch(Exception e) {System.out.println(e);}
+		// TODO Auto-generated method stub
+
+	}
+
+}
+
+
+enter s_result roll_no8
+enter s_result mark80
+enter s_result class se
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+
+
+mysql> use student;
+Database changed
+mysql> select * from s_result;
++---------+------+-------+
+| roll_no | mark | class |
++---------+------+-------+
+|       1 |   90 | te    |
+|       2 |   60 | be    |
+|       3 |   70 | se    |
+|       4 |   95 | fe    |
+|       5 |   58 | se    |
+|       6 |   34 | be    |
++---------+------+-------+
+6 rows in set (0.01 sec)
+
+mysql> select * from s_result;
++---------+------+-------+
+| roll_no | mark | class |
++---------+------+-------+
+|       1 |   90 | te    |
+|       2 |   60 | be    |
+|       3 |   70 | se    |
+|       4 |   95 | fe    |
+|       5 |   58 | se    |
+|       6 |   34 | be    |
+|       7 |   56 | te    |
++---------+------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from s_result;
++---------+------+-------+
+| roll_no | mark | class |
++---------+------+-------+
+|       1 |   90 | te    |
+|       2 |   60 | be    |
+|       3 |   70 | se    |
+|       4 |   95 | fe    |
+|       5 |   58 | se    |
+|       6 |   34 | be    |
+|       7 |   56 | te    |
+|       8 |   80 | se    |
++---------+------+-------+
+8 rows in set (0.00 sec)
+
+package mysql1;
+import java.util.*;
+import java.sql.*;
+
+public class surajcon {
+
+	public static void main(String[] args) {
+	
+			try {
+				Scanner sc= new Scanner(System.in);
+				System.out.print("enter s_result roll_no");
+				int roll_no=sc.nextInt();
+				System.out.print("enter s_result mark");
+				int mk=sc.nextInt();
+				System.out.print("enter s_result class");
+				String cl=sc.next();
+					
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/student","root","Suraj@12345");
+				Statement stmt=con.createStatement();
+				String query = "DELETE FROM s_result WHERE roll_no=("+roll_no+");";
+				stmt.execute(query);
+				con.close();
+				sc.close();
+			}catch(Exception e) {System.out.println(e);}
+		// TODO Auto-generated method stub
+
+	}
+
+}
+
+
+mysql> use student;
+Database changed
+mysql> select * from s_result;
++---------+------+-------+
+| roll_no | mark | class |
++---------+------+-------+
+|       1 |   90 | te    |
+|       3 |   70 | se    |
+|       4 |   95 | fe    |
+|       5 |   58 | se    |
+|       6 |   34 | be    |
+|       7 |   56 | te    |
+|       8 |   80 | se    |
++---------+------+-------+
+7 rows in set (0.01 sec)
+
+INPUT
+
+enter s_result roll_no5
+enter s_result mark58
+enter s_result classse
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+
+mysql> select * from s_result;
++---------+------+-------+
+| roll_no | mark | class |
++---------+------+-------+
+|       1 |   90 | te    |
+|       3 |   70 | se    |
+|       4 |   95 | fe    |
+|       6 |   34 | be    |
+|       7 |   56 | te    |
+|       8 |   80 | se    |
++---------+------+-------+
+6 rows in set (0.01 sec)

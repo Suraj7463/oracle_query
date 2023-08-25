@@ -1,0 +1,486 @@
+SQL*Plus: Release 11.2.0.2.0 Production on Fri Jul 29 15:10:16 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect system/orcl123
+Connected.
+SQL> create user suraj identifide by suraj123;
+create user suraj identifide by suraj123
+                  *
+ERROR at line 1:
+ORA-00922: missing or invalid option
+
+
+SQL> create user suraj identified by suraj123;
+
+User created.
+
+SQL> grant all priviledges to suraj123;
+grant all priviledges to suraj123
+      *
+ERROR at line 1:
+ORA-00990: missing or invalid privilege
+
+
+SQL> grant all priviledges to suraj;
+grant all priviledges to suraj
+      *
+ERROR at line 1:
+ORA-00990: missing or invalid privilege
+
+
+SQL> grant all privileges to suraj;
+
+Grant succeeded.
+
+SQL> connetct suraj/suraj123
+SP2-0734: unknown command beginning "connetct s..." - rest of line ignored.
+SQL> connect suraj/suraj123
+Connected.
+SQL> create table atos_emp
+  2  (empid varchar2(10),
+  3  name varchar2(10),
+  4  job varchar2(10),
+  5  bsalary number(10));
+
+Table created.
+
+SQL> select * from atos_emp;
+
+no rows selected
+
+SQL> desc atos_emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPID                                              VARCHAR2(10)
+ NAME                                               VARCHAR2(10)
+ JOB                                                VARCHAR2(10)
+ BSALARY                                            NUMBER(10)
+
+SQL> create table atos_emp
+  2  (empid number(10),
+  3  name varchar2(10),
+  4    4  job varchar2(10),
+  5
+SQL> create table atos_emp
+  2  (empid number(10),
+  3  name varchar2(10),
+  4  job varchar2(10),
+  5  bsalary number(10));
+create table atos_emp
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> drop table atos_emp;
+
+Table dropped.
+
+SQL> create table atos_emp
+  2  (empid number(10),
+  3   name varchar2(10),
+  4  job varchar2(10),
+  5  bsalary number(10));
+
+Table created.
+
+SQL> desc table atos_emp;
+Usage: DESCRIBE [schema.]object[@db_link]
+SQL> desc atos_emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPID                                              NUMBER(10)
+ NAME                                               VARCHAR2(10)
+ JOB                                                VARCHAR2(10)
+ BSALARY                                            NUMBER(10)
+
+SQL> insert into atos_emp values(&empid,'&ename','&job','&bsalary');
+Enter value for empid: 101
+Enter value for ename: suraj
+Enter value for job: se
+Enter value for bsalary: 30000
+old   1: insert into atos_emp values(&empid,'&ename','&job','&bsalary')
+new   1: insert into atos_emp values(101,'suraj','se','30000')
+
+1 row created.
+
+SQL> /
+Enter value for empid: 102
+Enter value for ename: vaibhav
+Enter value for job: web developer
+Enter value for bsalary: 30000
+old   1: insert into atos_emp values(&empid,'&ename','&job','&bsalary')
+new   1: insert into atos_emp values(102,'vaibhav','web developer','30000')
+insert into atos_emp values(102,'vaibhav','web developer','30000')
+                                          *
+ERROR at line 1:
+ORA-12899: value too large for column "SURAJ"."ATOS_EMP"."JOB" (actual: 13,
+maximum: 10)
+
+
+SQL> /
+Enter value for empid: 103
+Enter value for ename: ganesh
+Enter value for job: se
+Enter value for bsalary: 40000
+old   1: insert into atos_emp values(&empid,'&ename','&job','&bsalary')
+new   1: insert into atos_emp values(103,'ganesh','se','40000')
+
+1 row created.
+
+SQL>
+SQL> /
+Enter value for empid: 104
+Enter value for ename: raviraj
+Enter value for job: de
+Enter value for bsalary: 40000
+old   1: insert into atos_emp values(&empid,'&ename','&job','&bsalary')
+new   1: insert into atos_emp values(104,'raviraj','de','40000')
+
+1 row created.
+
+SQL> /
+Enter value for empid: 105
+Enter value for ename: suresh
+Enter value for job: teacher
+Enter value for bsalary: 50000
+old   1: insert into atos_emp values(&empid,'&ename','&job','&bsalary')
+new   1: insert into atos_emp values(105,'suresh','teacher','50000')
+
+1 row created.
+
+SQL> select * from atos_emp;
+
+     EMPID NAME       JOB           BSALARY
+---------- ---------- ---------- ----------
+       101 suraj      se              30000
+       103 ganesh     se              40000
+       104 raviraj    de              40000
+       105 suresh     teacher         50000
+
+SQL> alter table atos_emp add(HRA number(10));
+
+Table altered.
+
+SQL> desc atos_emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPID                                              NUMBER(10)
+ NAME                                               VARCHAR2(10)
+ JOB                                                VARCHAR2(10)
+ BSALARY                                            NUMBER(10)
+ HRA                                                NUMBER(10)
+
+SQL> alter table atos_emp add(TA number(10));
+
+Table altered.
+
+SQL> alter table atos_emp add(PF number(10));
+
+Table altered.
+
+SQL> update atos_emp set HRA=BSALARY*0.30,TA=BSALARY*0.20,PF=BSALARY*0.10;
+
+4 rows updated.
+
+SQL> select * from atos_emp;
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF
+---------- ---------- ---------- ---------- ---------- ---------- ----------
+       101 suraj      se              30000       9000       6000       3000
+       103 ganesh     se              40000      12000       8000       4000
+       104 raviraj    de              40000      12000       8000       4000
+       105 suresh     teacher         50000      15000      10000       5000
+
+SQL> alter table atos_emp add(pune varchar2(10),mumbai varchar2(10),solapur varchar2(10));
+
+Table altered.
+
+SQL> desc atos_emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPID                                              NUMBER(10)
+ NAME                                               VARCHAR2(10)
+ JOB                                                VARCHAR2(10)
+ BSALARY                                            NUMBER(10)
+ HRA                                                NUMBER(10)
+ TA                                                 NUMBER(10)
+ PF                                                 NUMBER(10)
+ PUNE                                               VARCHAR2(10)
+ MUMBAI                                             VARCHAR2(10)
+ SOLAPUR                                            VARCHAR2(10)
+
+SQL> alter table atos_emp drop(PUNE,MUMBAI,SOLAPUR);
+
+Table altered.
+
+SQL> SELECT * FROM ATOS_EMP;
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF
+---------- ---------- ---------- ---------- ---------- ---------- ----------
+       101 suraj      se              30000       9000       6000       3000
+       103 ganesh     se              40000      12000       8000       4000
+       104 raviraj    de              40000      12000       8000       4000
+       105 suresh     teacher         50000      15000      10000       5000
+
+SQL> alter table atos_emp add(city varchar2(10));
+
+Table altered.
+
+SQL> update atos_emp set city='PUNE
+  2  'where empid in(101,102);
+
+1 row updated.
+
+SQL> update atos_emp set city='mumbai'
+  2  where empid in(103,105);
+
+2 rows updated.
+
+SQL> select * from atos_emp;
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF
+---------- ---------- ---------- ---------- ---------- ---------- ----------
+CITY
+----------
+       101 suraj      se              30000       9000       6000       3000
+PUNE
+
+       103 ganesh     se              40000      12000       8000       4000
+mumbai
+
+       104 raviraj    de              40000      12000       8000       4000
+
+
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF
+---------- ---------- ---------- ---------- ---------- ---------- ----------
+CITY
+----------
+       105 suresh     teacher         50000      15000      10000       5000
+mumbai
+
+
+SQL> select * from atos_emp;
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF
+---------- ---------- ---------- ---------- ---------- ---------- ----------
+CITY
+----------
+       101 suraj      se              30000       9000       6000       3000
+PUNE
+
+       103 ganesh     se              40000      12000       8000       4000
+mumbai
+
+       104 raviraj    de              40000      12000       8000       4000
+
+
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF
+---------- ---------- ---------- ---------- ---------- ---------- ----------
+CITY
+----------
+       105 suresh     teacher         50000      15000      10000       5000
+mumbai
+
+
+SQL> update atos_emp set city='latur'
+  2  where empid in(104);
+
+1 row updated.
+
+SQL> set linesize 150
+SQL> set spacesize 30
+SP2-0158: unknown SET option "spacesize"
+SQL> set pagesize 30
+SQL> select * from atos_emp;
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF CITY
+---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+       101 suraj      se              30000       9000       6000       3000 PUNE
+       103 ganesh     se              40000      12000       8000       4000 mumbai
+       104 raviraj    de              40000      12000       8000       4000 latur
+       105 suresh     teacher         50000      15000      10000       5000 mumbai
+
+SQL> update atos_emp set city='mumbai'
+  2  where HRA=0,TA=0,PF=0;
+where HRA=0,TA=0,PF=0
+           *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> update atos_emp set city='mumbai'
+  2  where HRA,TA,PF=0;
+where HRA,TA,PF=0
+         *
+ERROR at line 2:
+ORA-00920: invalid relational operator
+
+
+SQL> update atos_emp set HRA=0,TA=0,PF=0
+  2  WHERE city='mumbai';
+
+2 rows updated.
+
+SQL> select * from atos_emp;
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF CITY
+---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+       101 suraj      se              30000       9000       6000       3000 PUNE
+       103 ganesh     se              40000          0          0          0 mumbai
+       104 raviraj    de              40000      12000       8000       4000 latur
+       105 suresh     teacher         50000          0          0          0 mumbai
+
+SQL> alter table atos_emp add(Total_sal varchar2(10),Ann_sal varchar2(10));
+
+Table altered.
+
+SQL> alter table atos_emp drop(Total_sal,Ann_sal);
+
+Table altered.
+
+SQL> alter table atos_emp add(total_sal number(10),ann_sal number(10));
+
+Table altered.
+
+SQL> update atos_emp set total_sal=BSALARY+HRA+TA+PF
+  2  ;
+
+4 rows updated.
+
+SQL> select * from atos_emp;
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF CITY        TOTAL_SAL    ANN_SAL
+---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+       101 suraj      se              30000       9000       6000       3000 PUNE            48000
+       103 ganesh     se              40000          0          0          0 mumbai          40000
+       104 raviraj    de              40000      12000       8000       4000 latur           64000
+       105 suresh     teacher         50000          0          0          0 mumbai          50000
+
+SQL> update atos_emp set Ann_sal=total_sal*12;
+
+4 rows updated.
+
+SQL> select * from atos_emp;
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF CITY        TOTAL_SAL    ANN_SAL
+---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+       101 suraj      se              30000       9000       6000       3000 PUNE            48000     576000
+       103 ganesh     se              40000          0          0          0 mumbai          40000     480000
+       104 raviraj    de              40000      12000       8000       4000 latur           64000     768000
+       105 suresh     teacher         50000          0          0          0 mumbai          50000     600000
+
+SQL> alter table atos_emp add(deptno number(10));
+
+Table altered.
+
+SQL> select * from atos_emp;
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF CITY        TOTAL_SAL    ANN_SAL     DEPTNO
+---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+       101 suraj      se              30000       9000       6000       3000 PUNE            48000     576000
+       103 ganesh     se              40000          0          0          0 mumbai          40000     480000
+       104 raviraj    de              40000      12000       8000       4000 latur           64000     768000
+       105 suresh     teacher         50000          0          0          0 mumbai          50000     600000
+
+SQL> update atos_emp set deptno=40 where city=
+  2
+SQL> update atos_emp set deptno=40 where city='mumbai';
+
+2 rows updated.
+
+SQL>  update atos_emp set deptno=50 where city='pune';
+
+0 rows updated.
+
+SQL> update atos_emp set deptno=50 where city='PUNE';
+
+0 rows updated.
+
+SQL> SELECT * FROM ATOS_EMP;
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF CITY        TOTAL_SAL    ANN_SAL     DEPTNO
+---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+       101 suraj      se              30000       9000       6000       3000 PUNE            48000     576000
+       103 ganesh     se              40000          0          0          0 mumbai          40000     480000         40
+       104 raviraj    de              40000      12000       8000       4000 latur           64000     768000
+       105 suresh     teacher         50000          0          0          0 mumbai          50000     600000         40
+
+SQL> update atos_emp set deptno=50
+  2  where city='pune';
+
+0 rows updated.
+
+SQL> update atos_emp set deptno=50
+  2  where city='latur';
+
+1 row updated.
+
+SQL> update atos_emp set deptno=60
+  2  where city='pune';
+
+0 rows updated.
+
+SQL> update atos_emp set deptno=60
+  2  where city='PUNE';
+
+0 rows updated.
+
+SQL> SELECT * FROM ATOS_EMP;
+
+     EMPID NAME       JOB           BSALARY        HRA         TA         PF CITY        TOTAL_SAL    ANN_SAL     DEPTNO
+---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+       101 suraj      se              30000       9000       6000       3000 PUNE            48000     576000
+       103 ganesh     se              40000          0          0          0 mumbai          40000     480000         40
+       104 raviraj    de              40000      12000       8000       4000 latur           64000     768000         50
+       105 suresh     teacher         50000          0          0          0 mumbai          50000     600000         40
+
+SQL> update atos_emp set deptno=50
+  2  where city='PUNE ';
+
+0 rows updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> create table HDFC_ATOS
+  2  as
+  3  select empid,ename,total_sal,ann_sal from atos_emp;
+select empid,ename,total_sal,ann_sal from atos_emp
+             *
+ERROR at line 3:
+ORA-00904: "ENAME": invalid identifier
+
+
+SQL> create table HDFC_ATOS
+  2  as
+  3  select empid,name,total_sal,ann_sal from atos_emp;
+
+Table created.
+
+SQL> select * from HDFC_ATOS;
+
+     EMPID NAME        TOTAL_SAL    ANN_SAL
+---------- ---------- ---------- ----------
+       101 suraj           48000     576000
+       103 ganesh          40000     480000
+       104 raviraj         64000     768000
+       105 suresh          50000     600000
+
+SQL> SELECT * FROM HDFC_ATOS
+  2  ORDER BY NAME;
+
+     EMPID NAME        TOTAL_SAL    ANN_SAL
+---------- ---------- ---------- ----------
+       103 ganesh          40000     480000
+       104 raviraj         64000     768000
+       101 suraj           48000     576000
+       105 suresh          50000     600000
+
+SQL> commit;
+
+Commit complete.

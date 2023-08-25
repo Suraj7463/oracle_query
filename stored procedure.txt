@@ -1,0 +1,118 @@
+mysql> use student;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| information       |
+| library           |
+| library_audit     |
+| result            |
+| s_marklist        |
+| s_result          |
+| stud_mark         |
+| stud_marks        |
++-------------------+
+8 rows in set (0.01 sec)
+
+mysql> select * from library;
++----------+--------+----------+
+| order_no | bookno | bookname |
++----------+--------+----------+
+|        1 |      3 | DELD     |
+|        2 |      4 | spos     |
+|        3 |      5 | cn       |
+|        4 |      7 | ppl      |
+|        5 |      8 | oop      |
+|        6 |      9 | bee      |
+|        7 |      2 | cg       |
+|        8 |      1 | sa       |
++----------+--------+----------+
+8 rows in set (0.04 sec)
+
+mysql> select * from s_result;
++---------+------+-------+
+| roll_no | mark | class |
++---------+------+-------+
+|       1 |   90 | te    |
+|       2 |   60 | be    |
+|       3 |   70 | se    |
+|       4 |   95 | fe    |
+|       5 |   58 | se    |
++---------+------+-------+
+5 rows in set (0.00 sec)
+mysql> delimiter //
+mysql> create procedure proc1(in odno int)
+    -> select * from s_result where mark=odno;
+    -> end //
+Query OK, 0 rows affected (0.05 sec)
+mysql> call proc1(70);
+    -> //
++---------+------+-------+
+| roll_no | mark | class |
++---------+------+-------+
+|       3 |   70 | se    |
++---------+------+-------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call proc1(58);
+    -> //
++---------+------+-------+
+| roll_no | mark | class |
++---------+------+-------+
+|       5 |   58 | se    |
++---------+------+-------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call proc1(60);
+    -> //
++---------+------+-------+
+| roll_no | mark | class |
++---------+------+-------+
+|       2 |   60 | be    |
++---------+------+-------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create procedure proc2(out max_mk int)
+    -> begin
+    -> select max(mark) into max_mk from s_result;
+    -> end //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select @m;
+    -> //
++------------+
+| @m         |
++------------+
+| NULL       |
++------------+
+1 row in set (0.01 sec)
+
+mysql> call proc2(@n);
+    -> //
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select @n;
+    -> //
++------+
+| @n   |
++------+
+|   95 |
++------+
+1 row in set (0.01 sec)
+
+mysql> create function AddNum(a int, b int) returns int
+    -> deterministic
+    -> begin
+    -> declare sum int default 0;
+    -> set sum:=a+b;
+    -> return sum;
+    -> end;//
+ERROR 1304 (42000): FUNCTION AddNum already exists
+mysql> create function

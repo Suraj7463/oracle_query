@@ -1,0 +1,28 @@
+import pymongo
+client=pymongo.MongoClient('mongodb://127.0.0.1:27017/')
+mydb=client["imploy"]
+information=mydb.table1
+rec=[{"employno":21,
+     "name":"ram",
+     "job":"software engg",
+     "sal" : 4000,
+     "deptno":23
+     }]
+information.insert_many(rec)
+
+import pymongo
+client=pymongo.MongoClient('mongodb://127.0.0.1:27017/')
+mydb=client["imploy"]
+information=mydb.table1
+rec=[{"employno":21,
+     "name":"ram",
+     "job":"software engg",
+     "sal" : 4000,
+     "deptno":23
+     }]
+information.insert(rec)
+
+Warning (from warnings module):
+  File "C:/Users/suraj dudhabhate/Desktop/database code/conectivmongo.py", line 11
+    information.insert(rec)
+DeprecationWarning: insert is deprecated. Use insert_one or insert_many instead.

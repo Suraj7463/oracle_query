@@ -1,0 +1,189 @@
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| information       |
+| library           |
+| library_audit     |
+| s_marklist        |
+| s_result          |
+| stud_mark         |
+| student           |
++-------------------+
+7 rows in set (0.01 sec)
+
+mysql> select * from library;
++----------+--------+----------+
+| order_no | bookno | bookname |
++----------+--------+----------+
+|        1 |      3 | DELD     |
+|        2 |      4 | spos     |
+|        3 |      5 | cn       |
+|        4 |      7 | ppl      |
++----------+--------+----------+
+4 rows in set (0.00 sec)
+
+
+Delimiter //
+mysql> create procedure proc_emp()
+    -> begin
+    -> declare v_order_no int;
+    -> declare v_bookname char(10);
+    -> declare v_finished integer default 0;
+    -> declare c2 cursor for select order_no, bookname from library;
+    -> declare continue handler for not found set v_finished = 1;
+    -> open c2;
+    -> get_emp:loop
+    -> fetch c2 into v_order_no,v_bookname;
+    -> if v_finished=1 then
+    -> leave get_emp;
+    -> end if;
+    -> select concat(v_order_no,v_bookname);
+    -> END LOOP get_emp;
+    -> close c2;
+    -> end //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> call proc_emp();
+    -> //
++-------------------------------+
+| concat(v_order_no,v_bookname) |
++-------------------------------+
+| 1DELD                         |
++-------------------------------+
+1 row in set (0.01 sec)
+
++-------------------------------+
+| concat(v_order_no,v_bookname) |
++-------------------------------+
+| 2spos                         |
++-------------------------------+
+1 row in set (0.01 sec)
+
++-------------------------------+
+| concat(v_order_no,v_bookname) |
++-------------------------------+
+| 3cn                           |
++-------------------------------+
+1 row in set (0.01 sec)
+
++-------------------------------+
+| concat(v_order_no,v_bookname) |
++-------------------------------+
+| 4ppl                          |
++-------------------------------+
+1 row in set (0.02 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+
+
+
+
+procedure name and loop name defference also code is exicuted no problem
+
+create procedure proc_emp()
+    -> begin
+    -> declare v_order_no int;
+    -> declare v_bookname char(10);
+    -> declare v_finished integer default 0;
+    -> declare c2 cursor for select order_no, bookname from library;
+    -> declare continue handler for not found set v_finished = 1;
+    -> open c2;
+    -> get_s:loop
+    -> fetch c2 into v_order_no,v_bookname;
+    -> if v_finished=1 then
+    -> leave get_s;
+    -> end if;
+    -> select concat(v_order_no,v_bookname);
+    -> END LOOP get_s;
+    -> close c2;
+    -> end //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> call proc_emp();
+    -> //
++-------------------------------+
+| concat(v_order_no,v_bookname) |
++-------------------------------+
+| 1DELD                         |
++-------------------------------+
+1 row in set (0.01 sec)
+
++-------------------------------+
+| concat(v_order_no,v_bookname) |
++-------------------------------+
+| 2spos                         |
++-------------------------------+
+1 row in set (0.02 sec)
+
++-------------------------------+
+| concat(v_order_no,v_bookname) |
++-------------------------------+
+| 3cn                           |
++-------------------------------+
+1 row in set (0.02 sec)
+
++-------------------------------+
+| concat(v_order_no,v_bookname) |
++-------------------------------+
+| 4ppl                          |
++-------------------------------+
+1 row in set (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> drop procedure proc_emp;
+    -> //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create procedure proc_emp()
+    -> begin
+    -> declare v_order_no int;
+    -> declare v_bookname char(10);
+    -> declare v_finished integer default 0;
+    -> declare c2 cursor for select order_no, bookname from library;
+    -> declare continue handler for not found set v_finished = 1;
+    -> open c2;
+    -> get_s:loop
+    -> fetch c2 into v_order_no,v_bookname;
+    -> if v_finished=1 then
+    -> leave get_s;
+    -> end if;
+    -> select concat(v_order_no,concat('-',v_bookname));
+    -> END LOOP get_s;
+    -> close c2;
+    -> end //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> call proc_emp();
+    -> //
++-------------------------------------------+
+| concat(v_order_no,concat('-',v_bookname)) |
++-------------------------------------------+
+| 1-DELD                                    |
++-------------------------------------------+
+1 row in set (0.01 sec)
+
++-------------------------------------------+
+| concat(v_order_no,concat('-',v_bookname)) |
++-------------------------------------------+
+| 2-spos                                    |
++-------------------------------------------+
+1 row in set (0.01 sec)
+
++-------------------------------------------+
+| concat(v_order_no,concat('-',v_bookname)) |
++-------------------------------------------+
+| 3-cn                                      |
++-------------------------------------------+
+1 row in set (0.02 sec)
+
++-------------------------------------------+
+| concat(v_order_no,concat('-',v_bookname)) |
++-------------------------------------------+
+| 4-ppl                                     |
++-------------------------------------------+
+1 row in set (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)

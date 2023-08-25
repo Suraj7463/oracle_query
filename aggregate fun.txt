@@ -1,0 +1,124 @@
+aggregate functions below
+count(column name)
+min(column name)
+max(column name)
+avg(column name)
+sum(column name)
+
+ select * from s_result;
++---------+------+-------+
+| roll_no | mark | class |
++---------+------+-------+
+|       1 |   90 | te    |
+|       2 |   60 | be    |
+|       3 |   70 | se    |
+|       4 |   95 | fe    |
+|       5 |   58 | se    |
++---------+------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select count(class) from s_result;
++--------------+
+| count(class) |
++--------------+
+|            5 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select count(class) from s_result where(mark)>95;
++--------------+
+| count(class) |
++--------------+
+|            0 |
++--------------+
+1 row in set (0.00 sec)
+
+
+mysql> select count(class) as total from s_result where(mark)<95;
++-------+
+| total |
++-------+
+|     4 |
++-------+
+1 row in set (0.00 sec)
+
+
+mysql> select sum(mark) as total from s_result;
++-------+
+| total |
++-------+
+|   373 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select sum(mark) as total from s_result where(mark)<95;
++-------+
+| total |
++-------+
+|   278 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select min(mark) as number from s_result;
++--------+
+| number |
++--------+
+|     58 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select min(mark) as number from s_result where(mark)<58;
++--------+
+| number |
++--------+
+|   NULL |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select min(mark) as number from s_result where(mark)<70;
++--------+
+| number |
++--------+
+|     58 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select min(mark) as number from s_result where(mark)>70;
++--------+
+| number |
++--------+
+|     90 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select avg(mark) as average from s_result;
++---------+
+| average |
++---------+
+| 74.6000 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select avg(mark) as average from s_result where (mark)<90;
++---------+
+| average |
++---------+
+| 62.6667 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select max(mark) as maximum from s_result;
++---------+
+| maximum |
++---------+
+|      95 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select max(mark) as maximum from s_result where (mark)<90;
++---------+
+| maximum |
++---------+
+|      70 |
++---------+
+1 row in set (0.00 sec)

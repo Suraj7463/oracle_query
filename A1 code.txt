@@ -1,0 +1,219 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| detail             |
+| employ             |
+| employ_1           |
+| freands            |
+| information_schema |
+| my_data            |
+| my_data1           |
+| my_db              |
+| mydata             |
+| mysql              |
+| performance_schema |
+| seles              |
+| student            |
+| student1           |
+| student2           |
+| suraj              |
+| sys                |
++--------------------+
+17 rows in set (0.05 sec)
+
+mysql> create database stud_info;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| detail             |
+| employ             |
+| employ_1           |
+| freands            |
+| information_schema |
+| my_data            |
+| my_data1           |
+| my_db              |
+| mydata             |
+| mysql              |
+| performance_schema |
+| seles              |
+| stud_info          |
+| student            |
+| student1           |
+| student2           |
+| suraj              |
+| sys                |
++--------------------+
+18 rows in set (0.00 sec)
+
+mysql> use stud_info;
+Database changed
+
+
+mysql> create table s_detail(firstname char(10),lastname char(10),rollno int,class char(2));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for t
+mysql> desc s_detail;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| firstname | char(10) | YES  |     | NULL    |       |
+| lastname  | char(10) | YES  |     | NULL    |       |
+| rollno    | int      | YES  |     | NULL    |       |
+| class     | char(2)  | YES  |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+
+mysql> insert into s_detail value("suraj","dudhabhate",210221,"te");
+Query OK, 1 row affected (0.02 sec)
+
+
+mysql> insert into s_detail value("ram","chavan",4803,"se"),("mahesh","ghodke",8493,"fe"),("pravin","jatnure",8594,"te");
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from s_detail;
++-----------+------------+--------+-------+
+| firstname | lastname   | rollno | class |
++-----------+------------+--------+-------+
+| suraj     | dudhabhate | 210221 | te    |
+| ram       | chavan     |   4803 | se    |
+| mahesh    | ghodke     |   8493 | fe    |
+| pravin    | jatnure    |   8594 | te    |
++-----------+------------+--------+-------+
+4 rows in set (0.01 sec)
+
+
+mysql> alter table s_detail add devision char(2) after class;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+mysql> desc s_detail;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| firstname | char(10) | YES  |     | NULL    |       |
+| lastname  | char(10) | YES  |     | NULL    |       |
+| rollno    | int      | YES  |     | NULL    |       |
+| class     | char(2)  | YES  |     | NULL    |       |
+| devision  | char(2)  | YES  |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> alter table s_detail drop class;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc s_detail;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| firstname | char(10) | YES  |     | NULL    |       |
+| lastname  | char(10) | YES  |     | NULL    |       |
+| rollno    | int      | YES  |     | NULL    |       |
+| devision  | char(2)  | YES  |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> rename table s_detail to s_info;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc s_info;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| firstname | char(10) | YES  |     | NULL    |       |
+| lastname  | char(10) | YES  |     | NULL    |       |
+| rollno    | int      | YES  |     | NULL    |       |
+| devision  | char(2)  | YES  |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from s_info;
++-----------+------------+--------+----------+
+| firstname | lastname   | rollno | devision |
++-----------+------------+--------+----------+
+| suraj     | dudhabhate | 210221 | NULL     |
+| ram       | chavan     |   4803 | NULL     |
+| mahesh    | ghodke     |   8493 | NULL     |
+| pravin    | jatnure    |   8594 | NULL     |
++-----------+------------+--------+----------+
+4 rows in set (0.00 sec)
+
+
+mysql> select (firstname) from s_info;
++-----------+
+| firstname |
++-----------+
+| suraj     |
+| ram       |
+| mahesh    |
+| pravin    |
++-----------+
+4 rows in set (0.00 sec)
+
+mysql> select (firstname),(lastname) from s_info;
++-----------+------------+
+| firstname | lastname   |
++-----------+------------+
+| suraj     | dudhabhate |
+| ram       | chavan     |
+| mahesh    | ghodke     |
+| pravin    | jatnure    |
++-----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> create view b_info as select rollno,firstname from s_info;
+Query OK, 0 rows affected (0.02 sec)
+
+
+mysql> show columns from b_info;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| rollno    | int      | YES  |     | NULL    |       |
+| firstname | char(10) | YES  |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> drop view b_info;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show cloumns from b_info;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cloumns from b_info' at line 1
+ 
+mysql> select * from s_info;
++-----------+------------+--------+----------+
+| firstname | lastname   | rollno | devision |
++-----------+------------+--------+----------+
+| suraj     | dudhabhate | 210221 | NULL     |
+| ram       | chavan     |   4803 | NULL     |
+| mahesh    | ghodke     |   8493 | NULL     |
+| pravin    | jatnure    |   8594 | NULL     |
++-----------+------------+--------+----------+
+4 rows in set (0.00 sec)
+
+mysql> create view b_info as select lastname,rollno from s_info where firstname="suraj";
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from b_info;
++------------+--------+
+| lastname   | rollno |
++------------+--------+
+| dudhabhate | 210221 |
++------------+--------+
+1 row in set (0.01 sec)
+
+mysql> truncate table s_info;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from s_info;
+Empty set (0.01 sec)

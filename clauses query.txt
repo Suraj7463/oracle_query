@@ -1,0 +1,124 @@
+create primary key query below
+create table branch(roll_no int,firstname char(10),fees int,class char(3),primary key(roll_no));
+if you have created allready table after create primary key below syntax
+alter table b_work add primary key(bid);
+      tablename                  columnname
+group by clouse 
+this clouse use for exicute more than one column
+syntax
+select city,count(*) as total_count from b_work group by city;
++--------+-------------+
+| city   | total_count |
++--------+-------------+
+| puna   |           2 |
+| mumbai |           2 |
+| latur  |           1 |
+| satara |           1 |
++--------+-------------+
+select city,count(bid) as total from b_work group by city having count(bid)>1;
++--------+-------+
+| city   | total |
++--------+-------+
+| puna   |     2 |
+| mumbai |     2 |
++--------+-------+
+select avg(salry) as avgsalary from b_work;
++-----------+
+| avgsalary |
++-----------+
+|  433.3333 |
++-----------+
+1 row in set (0.01 sec)
+
+mysql>  select sum(salry) as avgsalary from b_work;
++-----------+
+| avgsalary |
++-----------+
+|      2600 |
+
+select city,min(salry) as minsalry from b_work group by city;
++--------+----------+
+| city   | minsalry |
++--------+----------+
+| puna   |      200 |
+| mumbai |      300 |
+| latur  |      400 |
+| satara |      500 |
++--------+----------+
+
+select city,max(salry) as maxsalry from b_work group by city;
++--------+----------+
+| city   | maxsalry |
++--------+----------+
+| puna   |      600 |
+| mumbai |      600 |
+| latur  |      400 |
+| satara |      500 |
++--------+----------+
+
+select city,avg(salry) as avgsalry from b_work group by city;
++--------+----------+
+| city   | avgsalry |
++--------+----------+
+| puna   | 400.0000 |
+| mumbai | 450.0000 |
+| latur  | 400.0000 |
+| satara | 500.0000 |
++--------+----------+
+
+Having clouse
+this clouse use for specific condition,row,cloumn
+differnce between clouse of having and where
+having clouse use agreement like count...
+where clouse not use agreement 
+
+syntax of having clouse
+
+select city,count(bid) as total from b_work group by city having count(bid)>1;
++--------+-------+
+| city   | total |
++--------+-------+
+| puna   |     2 |
+| mumbai |     2 |
++--------+-------+
+order clouse 
+this clouse use for sort column decindig or acending order
+syntax ordre
+select * from b_work order by city;
++-----+--------+-------+-------+
+| bid | city   | name  | salry |
++-----+--------+-------+-------+
+|   3 | latur  | raj   |   400 |
+|   2 | mumbai | ram   |   300 |
+|   5 | mumbai | sani  |   600 |
+|   1 | puna   | suraj |   200 |
+|   6 | puna   | sami  |   600 |
+|   4 | satara | rani  |   500 |
++-----+--------+-------+-------+
+6 rows in set (0.01 sec)
+
+mysql> select * from b_work order by bid desc;
++-----+--------+-------+-------+
+| bid | city   | name  | salry |
++-----+--------+-------+-------+
+|   6 | puna   | sami  |   600 |
+|   5 | mumbai | sani  |   600 |
+|   4 | satara | rani  |   500 |
+|   3 | latur  | raj   |   400 |
+|   2 | mumbai | ram   |   300 |
+|   1 | puna   | suraj |   200 |
++-----+--------+-------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from b_work order by bid desc ,salry desc,name asc;
++-----+--------+-------+-------+
+| bid | city   | name  | salry |
++-----+--------+-------+-------+
+|   6 | puna   | sami  |   600 |
+|   5 | mumbai | sani  |   600 |
+|   4 | satara | rani  |   500 |
+|   3 | latur  | raj   |   400 |
+|   2 | mumbai | ram   |   300 |
+|   1 | puna   | suraj |   200 |
++-----+--------+-------+-------+
+6 rows in set (0.00 sec)

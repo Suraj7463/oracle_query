@@ -1,0 +1,61 @@
+SQL> select sysdate from dual;
+
+SYSDATE
+---------
+07-AUG-22
+
+SQL> select sysdate "todays",sysdate+1"tommarow",sysdate-1"yesterday" from dual;
+
+todays    tommarow  yesterday
+--------- --------- ---------
+07-AUG-22 08-AUG-22 06-AUG-22
+
+
+SQL> select current_date from dual;
+
+CURRENT_D
+---------
+07-AUG-22
+
+SQL> select current_date+15 from dual;
+
+CURRENT_D
+---------
+22-AUG-22
+
+SQL> select ename,lower(ename)"lname" from emp
+  2  where ename='SMITH';
+
+ENAME           lname
+--------------- ---------------
+SMITH           smith
+
+SQL> select add_months('07-AUG-22',5) FROM DUAL;
+
+ADD_MONTH
+---------
+07-JAN-23
+
+SQL> select last_day('07-AUG-22')FROM DUAL;
+
+LAST_DAY(
+---------
+31-AUG-22
+
+SQL> select months_between('01-JAN-22','01-JAN-11')FROM DUAL;
+
+MONTHS_BETWEEN('01-JAN-22','01-JAN-11')
+---------------------------------------
+                                    132
+
+SQL> select months_between('01-JAN-22','01-JAN-11')*30 FROM DUAL;
+
+MONTHS_BETWEEN('01-JAN-22','01-JAN-11')*30
+------------------------------------------
+                                      3960
+
+SQL> select months_between('01-JAN-22','01-JAN-11')/12 FROM DUAL;
+
+MONTHS_BETWEEN('01-JAN-22','01-JAN-11')/12
+------------------------------------------
+                                        11

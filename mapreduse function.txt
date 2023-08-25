@@ -1,0 +1,53 @@
+show dbs;
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+mydata  0.000GB
+> use mydata;
+switched to db mydata
+> db.student.find();
+{ "_id" : ObjectId("61369ca820b511043619b1f6"), "ID" : 1, "name" : "suraj", "phoneno" : 3423424323, "Address" : "pune", "Email" : "surajdudha83@gmail.com", "class" : "TE", "Div" : "A", "mark" : { "DBMS" : 90, "TOC" : 90, "CN" : 85 } }
+{ "_id" : ObjectId("61369f9f20b511043619b1f7"), "ID" : 2, "name" : "ram", "phoneno" : 4938503943, "Address" : "satara", "Email" : "ramchavan34@gmail.com", "class" : "be", "Div" : "A", "mark" : { "dbms" : 70, "toc" : 70, "cn" : 65 } }
+{ "_id" : ObjectId("6136a2a920b511043619b1f8"), "ID" : 3, "name" : "pravin", "phoneno" : 8473920845, "address" : "beed", "Email" : "pravintad8@gmail.com", "class" : "se", "Div" : "b", "mark" : { "dbms" : 40, "toc" : 40, "cn" : 45 } }
+{ "_id" : ObjectId("6136a3ca20b511043619b1f9"), "id" : 4, "name" : "sham", "phoneno" : 4893028454, "address" : "latur", "Email" : "shamtitade43@gmail.com", "class" : "fe", "div" : "A", "mark" : { "dbms" : 50, "toc" : 50, "cn" : 50 } }
+{ "_id" : ObjectId("616c5a6eadb447e829a30d59"), "id" : 5, "name" : "rajesh", "phoneno" : 8500330121, "Address" : "omrga", "class" : "be", "div" : "b", "mark" : { "dbms" : 78, "toc" : 72, "cn" : 65 } }
+> 
+> db.student.mapReduce(function(){
+... emit(this.Div,1)},
+... function(key,value){
+... return Array.sum(value)},
+... {out:"Div_Total"}).find()
+uncaught exception: TypeError: db.student.mapReduce(...).find is not a function :
+@(shell):1:1
+> db.student.mapReduce(function(){
+... emit(this.Div,1)},
+... function(key,value){
+... return Array.sum(value)},
+... {out:"Div_Total"})
+{ "result" : "Div_Total", "ok" : 1 }
+
+> db.Div_Total.find();
+{ "_id" : "b", "value" : 1 }
+{ "_id" : null, "value" : 2 }
+{ "_id" : "A", "value" : 2 }
+>
+
+rowng code
+> var map = function(){
+... var category;
+... if(this.mark.dbms >=70)
+... category = "High Score";
+... else
+... category="Average Score";
+... emit(category,{name:"this,name"});
+... }
+> var reduce = function(key,value){
+... var sum = 0;
+... values.forEach(function(doc){
+... sum +=1;
+... });
+... return {Count:sum};
+... }
+> var count = db.student.mapreduce(map,reduce,{out:"stud_result"});
+uncaught exception: TypeError: db.student.mapreduce is not a function :
+@(shell):1:13

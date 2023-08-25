@@ -1,0 +1,36 @@
+<!DOCTYPE.html>
+<html>
+<head>
+	<title>www.hp.com</title>
+</head>
+<body bgcolor="red">
+<body>
+	<center>
+	<u><h1>HP LAPTOP<h1></u></center>
+	<marquee scrolldelay="200" >
+		<img src="pics/1.jpg" width="200" height="100">
+		<img src="pics/2.png" width="200" height="100">
+		<img src="pics/3.jpg" width="200" height="100">
+		<img src="pics/4.jpg" width="200" height="100">
+		<img src="pics/5.jpg" width="200" height="100">
+
+	</marquee>
+	<marquee scrolldelay="150">
+	<p> this laptops very good and performance is better compared to the other laptops.
+		thes laptops are one of the best and light weight laptops </p>
+	</marquee>
+	<marquee scrolldelay="100">
+		<img src="pics/plane.png" width="300" height="50">
+	</marquee>
+	<marquee scrilldelay="300">
+		<img src="pics/wbpara.png"width="300"height="70" direction="left" loop="">
+	</marquee>
+	<marquee loop=2>
+		welcome for all students.
+	</marquee>
+
+
+
+
+</body>
+</html>

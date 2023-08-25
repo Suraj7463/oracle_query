@@ -1,0 +1,88 @@
+three tyeps of join query
+1 inner join
+2 left join
+3 right join
+
+create two tables
+costmers table below
+create table costmers(cid int,cname char(20),cemail char(20));
+Query OK, 0 rows affected (0.04 sec)
+insert into costmers value(3,"raj","raj@gmail.com"),(4,"sam","sam@gmail.com");
+Query OK, 2 rows affected (0.02 sec)
+select * from costmers;
+select * from costmers;
++------+-------+----------------+
+| cid  | cname | cemail         |
++------+-------+----------------+
+|    1 | ram   | ram@chavan.com |
+|    2 | mahi  | mahi@gmail.com |
+|    3 | raj   | raj@gmail.com  |
+|    4 | sam   | sam@gmail.com  |
+|    5 | teju  | teju@gmail.com |
++------+-------+----------------+
+
+order table below
+
+create table orders(oid int,odate date,oamount int,idno int);
+Query OK, 0 rows affected (0.05 sec)
+insert into orders value(1,"2021-05-02",90,2);
+Query OK, 1 row affected (0.02 sec)
+select * from orders;
++------+------------+---------+------+
+| oid  | odate      | oamount | idno |
++------+------------+---------+------+
+|    1 | 2021-05-02 |      90 |    2 |
+|    2 | 2020-01-03 |     943 |    3 |
+|    3 | 2021-03-05 |     342 |    1 |
+|    4 | 2021-04-02 |     843 |    4 |
+|    5 | 2021-05-05 |     800 |    6 |
++------+------------+---------+------+
+inner join syntax and output below
+
+select * from costmers inner join orders ON costmers.cid=orders.idno;
++------+-------+----------------+------+------------+---------+------+
+| cid  | cname | cemail         | oid  | odate      | oamount | idno |
++------+-------+----------------+------+------------+---------+------+
+|    2 | mahi  | mahi@gmail.com |    1 | 2021-05-02 |      90 |    2 |
+|    3 | raj   | raj@gmail.com  |    2 | 2020-01-03 |     943 |    3 |
+|    1 | ram   | ram@chavan.com |    3 | 2021-03-05 |     342 |    1 |
+|    4 | sam   | sam@gmail.com  |    4 | 2021-04-02 |     843 |    4 |
++------+-------+----------------+------+------------+---------+------+	
+left join syntax and output
+
+select * from costmers left join orders ON costmers.cid=orders.idno;
+
++------+-------+----------------+------+------------+---------+------+
+| cid  | cname | cemail         | oid  | odate      | oamount | idno |
++------+-------+----------------+------+------------+---------+------+
+|    1 | ram   | ram@chavan.com |    3 | 2021-03-05 |     342 |    1 |
+|    2 | mahi  | mahi@gmail.com |    1 | 2021-05-02 |      90 |    2 |
+|    3 | raj   | raj@gmail.com  |    2 | 2020-01-03 |     943 |    3 |
+|    4 | sam   | sam@gmail.com  |    4 | 2021-04-02 |     843 |    4 |
+|    5 | teju  | teju@gmail.com | NULL | NULL       |    NULL | NULL |
++------+-------+----------------+------+------------+---------+------+
+4 rows in set (0.00 sec)
+
+Right join syntax and output
+ select * from costmers right join orders ON costmers.cid=orders.idno;
++------+-------+----------------+------+------------+---------+------+
+| cid  | cname | cemail         | oid  | odate      | oamount | idno |
++------+-------+----------------+------+------------+---------+------+
+|    2 | mahi  | mahi@gmail.com |    1 | 2021-05-02 |      90 |    2 |
+|    3 | raj   | raj@gmail.com  |    2 | 2020-01-03 |     943 |    3 |
+|    1 | ram   | ram@chavan.com |    3 | 2021-03-05 |     342 |    1 |
+|    4 | sam   | sam@gmail.com  |    4 | 2021-04-02 |     843 |    4 |
+| NULL | NULL  | NULL           |    5 | 2021-05-05 |     800 |    6 |
++------+-------+----------------+------+------------+---------+------+
+
+specific column shou use of join query
+select cid,cemail,oamount from costmers left join orders ON costmers.cid=orders.idno;
++------+----------------+---------+
+| cid  | cemail         | oamount |
++------+----------------+---------+
+|    1 | ram@chavan.com |     342 |
+|    2 | mahi@gmail.com |      90 |
+|    3 | raj@gmail.com  |     943 |
+|    4 | sam@gmail.com  |     843 |
+|    5 | teju@gmail.com |    NULL |
++------+----------------+---------+

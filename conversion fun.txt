@@ -1,0 +1,226 @@
+SQL> connect scott/tiger;
+Connected.
+SQL> select 54 from dual;
+
+        54
+----------
+        54
+
+SQL> select '54' from dual;
+
+'5
+--
+54
+
+SQL> select to_char(54) from dual;
+
+TO
+--
+54
+
+SQL> select "89" from dual
+  2  ;
+select "89" from dual
+       *
+ERROR at line 1:
+ORA-00904: "89": invalid identifier
+
+
+SQL> select '78' from dual;
+
+'7
+--
+78
+
+SQL> select to_number('87')from dual;
+
+TO_NUMBER('87')
+---------------
+             87
+
+SQL> select ename,hiredate to_char(hiredate,'ddd')"no of days"from emp;
+select ename,hiredate to_char(hiredate,'ddd')"no of days"from emp
+                             *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select ename,hiredate to_char('hiredate','ddd')"no of days"from emp;
+select ename,hiredate to_char('hiredate','ddd')"no of days"from emp
+                             *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+
+
+
+SQL> set linesize 150;
+SQL> select * from emp;
+
+     EMPNO ENAME           JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- --------------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH           CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN           SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD            SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES           MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN          SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE           MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK           MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT           ANALYST         7566 19-APR-87       3000                    20
+      7839 KING            PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER          SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS           CLERK           7788 23-MAY-87       1100                    20
+
+     EMPNO ENAME           JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- --------------- --------- ---------- --------- ---------- ---------- ----------
+      7900 JAMES           CLERK           7698 03-DEC-81        950                    30
+      7902 FORD            ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER          CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+
+SQL> select ename,hiredate, to_char(hiredate,'ddd') from emp;
+
+ENAME           HIREDATE  TO_
+--------------- --------- ---
+SMITH           17-DEC-80 352
+ALLEN           20-FEB-81 051
+WARD            22-FEB-81 053
+JONES           02-APR-81 092
+MARTIN          28-SEP-81 271
+BLAKE           01-MAY-81 121
+CLARK           09-JUN-81 160
+SCOTT           19-APR-87 109
+KING            17-NOV-81 321
+TURNER          08-SEP-81 251
+ADAMS           23-MAY-87 143
+
+ENAME           HIREDATE  TO_
+--------------- --------- ---
+JAMES           03-DEC-81 337
+FORD            03-DEC-81 337
+MILLER          23-JAN-82 023
+
+14 rows selected.
+
+SQL> select ename,hiredate, to_char(hiredate,'ddd')"days" from emp;
+
+ENAME           HIREDATE  day
+--------------- --------- ---
+SMITH           17-DEC-80 352
+ALLEN           20-FEB-81 051
+WARD            22-FEB-81 053
+JONES           02-APR-81 092
+MARTIN          28-SEP-81 271
+BLAKE           01-MAY-81 121
+CLARK           09-JUN-81 160
+SCOTT           19-APR-87 109
+KING            17-NOV-81 321
+TURNER          08-SEP-81 251
+ADAMS           23-MAY-87 143
+
+ENAME           HIREDATE  day
+--------------- --------- ---
+JAMES           03-DEC-81 337
+FORD            03-DEC-81 337
+MILLER          23-JAN-82 023
+
+14 rows selected.
+
+SQL> select ename,hiredate, to_char(hiredate,'ddd')"days",to_char(hiredate,'ww')"weak",to_char(hiredate,'MM')"no_of_month" from emp;
+
+ENAME           HIREDATE  day we no
+--------------- --------- --- -- --
+SMITH           17-DEC-80 352 51 12
+ALLEN           20-FEB-81 051 08 02
+WARD            22-FEB-81 053 08 02
+JONES           02-APR-81 092 14 04
+MARTIN          28-SEP-81 271 39 09
+BLAKE           01-MAY-81 121 18 05
+CLARK           09-JUN-81 160 23 06
+SCOTT           19-APR-87 109 16 04
+KING            17-NOV-81 321 46 11
+TURNER          08-SEP-81 251 36 09
+ADAMS           23-MAY-87 143 21 05
+
+ENAME           HIREDATE  day we no
+--------------- --------- --- -- --
+JAMES           03-DEC-81 337 49 12
+FORD            03-DEC-81 337 49 12
+MILLER          23-JAN-82 023 04 01
+
+14 rows selected.
+
+SQL> select ename,hiredate, to_char(hiredate,'ddd')"days",to_char(hiredate,'ww')"weaked",to_char(hiredate,'MM')"no_of_month" from emp;
+
+ENAME           HIREDATE  day we no
+--------------- --------- --- -- --
+SMITH           17-DEC-80 352 51 12
+ALLEN           20-FEB-81 051 08 02
+WARD            22-FEB-81 053 08 02
+JONES           02-APR-81 092 14 04
+MARTIN          28-SEP-81 271 39 09
+BLAKE           01-MAY-81 121 18 05
+CLARK           09-JUN-81 160 23 06
+SCOTT           19-APR-87 109 16 04
+KING            17-NOV-81 321 46 11
+TURNER          08-SEP-81 251 36 09
+ADAMS           23-MAY-87 143 21 05
+
+ENAME           HIREDATE  day we no
+--------------- --------- --- -- --
+JAMES           03-DEC-81 337 49 12
+FORD            03-DEC-81 337 49 12
+MILLER          23-JAN-82 023 04 01
+
+14 rows selected.
+
+SQL> select ename,to_char(hiredate,'DAY')from emp where ename='KING';
+
+ENAME           TO_CHAR(HIREDATE,'DAY')
+--------------- ------------------------------------
+KING            TUESDAY
+
+SQL> select ename,job,to_char(hiredate,'DAY')"DAY",to_char(hiredate,'MM')"month" from emp;
+
+ENAME           JOB       DAY                                  mo
+--------------- --------- ------------------------------------ --
+SMITH           CLERK     WEDNESDAY                            12
+ALLEN           SALESMAN  FRIDAY                               02
+WARD            SALESMAN  SUNDAY                               02
+JONES           MANAGER   THURSDAY                             04
+MARTIN          SALESMAN  MONDAY                               09
+BLAKE           MANAGER   FRIDAY                               05
+CLARK           MANAGER   TUESDAY                              06
+SCOTT           ANALYST   SUNDAY                               04
+KING            PRESIDENT TUESDAY                              11
+TURNER          SALESMAN  TUESDAY                              09
+ADAMS           CLERK     SATURDAY                             05
+
+ENAME           JOB       DAY                                  mo
+--------------- --------- ------------------------------------ --
+JAMES           CLERK     THURSDAY                             12
+FORD            ANALYST   THURSDAY                             12
+MILLER          CLERK     SATURDAY                             01
+
+14 rows selected.
+
+SQL> select ename,job,to_char(hiredate,'month')"mo",to_char(hiredate,'dd')"day"from emp
+  2  where ename in('SMITH','TURNER');
+
+ENAME           JOB       mo                                   da
+--------------- --------- ------------------------------------ --
+SMITH           CLERK     december                             17
+TURNER          SALESMAN  september                            08
+
+SQL> select ename,job,deptno,to_char(hiredate,'DAY') "DAY", to_char(hiredate,'month')from emp
+  2  where to_char(hiredate,'MON') in ('MAY','FEB');
+
+ENAME           JOB           DEPTNO DAY                                  TO_CHAR(HIREDATE,'MONTH')
+--------------- --------- ---------- ------------------------------------ ------------------------------------
+ALLEN           SALESMAN          30 FRIDAY                               february
+WARD            SALESMAN          30 SUNDAY                               february
+BLAKE           MANAGER           30 FRIDAY                               may
+ADAMS           CLERK             20 SATURDAY                             may

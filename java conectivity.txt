@@ -1,0 +1,61 @@
+package mysql1;
+import java.util.*;
+import java.sql.*;
+public class ramcon {
+
+	public static void main(String[] args) {
+		try {
+			Scanner sc= new Scanner(System.in);
+			System.out.print("enter s_result roll_no");
+			int roll_no=sc.nextInt();
+			System.out.print("enter s_result mark");
+			int mk=sc.nextInt();
+			System.out.print("enter s_result class");
+			String cl=sc.next();
+				
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/student","root@localhost","Suraj@12345");
+			Statement stmt=con.createStatement();
+			String qeury = "INSERT INTO s_result VALUES("+roll_no+","+mk+",'"+cl+"');";
+			stmt.executeQuery("select * from s_result");
+			con.close();
+			stmt.close();
+		}catch(Exception e) {System.out.println(e);}
+		// TODO Auto-generated method stub
+
+	}
+
+}
+
+
+package mysql1;
+import java.util.*;
+import java.sql.*;
+
+public class surajcon {
+
+	public static void main(String[] args) {
+	
+			try {
+				Scanner sc= new Scanner(System.in);
+				System.out.print("enter s_result roll_no");
+				int roll_no=sc.nextInt();
+				System.out.print("enter s_result mark");
+				int mk=sc.nextInt();
+				System.out.print("enter s_result class");
+				String cl=sc.next();
+					
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/student","root","Suraj@12345");
+				Statement stmt=con.createStatement();
+				String qeury = "INSERT INTO s_result VALUES("+roll_no+","+mk+",'"+cl+"');";
+				stmt.executeQuery("select * from s_result");
+				con.close();
+				sc.close();
+			}catch(Exception e) {System.out.println(e);}
+		// TODO Auto-generated method stub
+
+	}
+
+}
+

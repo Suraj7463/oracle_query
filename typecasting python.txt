@@ -1,0 +1,38 @@
+n1=(input("enter first no"))
+n2=(input("enter second no"))
+n3=n1+n2
+print(n1,n2,n3)
+
+output
+enter first no5
+enter second no8
+5 8 58
+
+n1=int(input("enter first no"))
+n2=int(input("enter second no"))
+n3=n1+n2
+print(n1,n2,n3)
+output:
+enter first no5
+enter second no6
+5 6 11
+
+n1=float(input("enter first no"))
+n2=float(input("enter second no"))
+n3=n1+n2
+print(n1,n2,n3)
+
+enter first no4.5
+enter second no3.3
+4.5 3.3 7.8
+
+name=input("enter name:")
+sub1=int(input("enter sub1 mark:"))
+sub2=int(input("enter sub2 mark:"))
+total=sub1+sub2
+print(name,sub1,sub2,total)
+
+enter name:mahesh
+enter sub1 mark:54
+enter sub2 mark:45
+mahesh 54 45 99

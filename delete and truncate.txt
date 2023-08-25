@@ -1,0 +1,44 @@
+truncate means all the data removed by use of truncate command
+select * from student;
++---------+-----------+-----------+------+-------+
+| orderno | firstname | lastname  | fees | class |
++---------+-----------+-----------+------+-------+
+|       1 | suraj     | dudhbhate | 8000 | te    |
+|       2 | ram       | chavan    | 9000 | te    |
+|       3 | ganesh    | bhosale   | 7000 | te    |
+|       4 | rushi     | jadhav    | 5000 | se    |
+|       5 | pravin    | jatnure   | 2000 | be    |
+|       1 | suraj     | dudhbhate | 8000 | te    |
+|       2 | ram       | chavan    | 9000 | te    |
+|       3 | ganesh    | bhosale   | 7000 | te    |
+|       4 | rushi     | jadhav    | 5000 | se    |
+|       5 | pravin    | jatnure   | 2000 | be    |
++---------+-----------+-----------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> truncate table student;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select * from student;
+Empty set (0.01 sec)
+
+mysql> desc student;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| orderno   | int      | YES  |     | NULL    |       |
+| firstname | char(10) | YES  |     | NULL    |       |
+| lastname  | char(10) | YES  |     | NULL    |       |
+| fees      | int      | YES  |     | NULL    |       |
+| class     | char(2)  | YES  |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+drop means whole table is removes in the database
+
+
+mysql> drop table student;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> select * from student;
+ERROR 1146 (42S02): Table 'student.student' doesn't exist
